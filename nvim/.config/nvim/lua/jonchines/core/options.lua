@@ -1,41 +1,67 @@
-local opt = vim.opt -- for conciseness
+-- [[ Setting options ]]
+-- See `:help opt`
+
+-- Local variables
+local opt = vim.opt -- Used to be concise
 local indent = 2
 
--- default encoding
+-- Set file encoding
 opt.fileencoding = "utf-8"
 
--- open and maintain multiple buffers
+-- Open and maintain multiple buffers
 opt.hidden = true
 
--- line numbers
-opt.relativenumber = true -- show relative line numbers
-opt.number = true -- shows absolute line number on cursor line (when relative number is on)
+-- Set highlight on search
+opt.hlsearch = false
 
--- tabs & indentation
-opt.tabstop = indent -- spaces for tabs (prettier default)
-opt.shiftwidth = indent -- spaces for indent width
-opt.expandtab = true -- expand tab to spaces
-opt.autoindent = true -- copy indent from current line when starting new one
+-- Make line numbers default
+opt.number = true -- Shows absolute number
+opt.relativenumber = true -- Shows relative line numbers
+
+-- Enable mouse mode
+opt.mouse = "a"
+
+-- Sync clipboard between OS and Neovim.
+--  Remove this option if you want your OS clipboard to remain independent.
+--  See `:help 'clipboard'`
+-- opt.clipboard = 'unnamedplus'
+
+-- Enable break indent
+opt.breakindent = true
+
+-- Save undo history
+opt.undofile = true
+
+-- Case-insensitive searching UNLESS \C or capital in search
+opt.ignorecase = true -- Ignore case when searching
+opt.smartcase = true -- Mixed case search term implies exact search term
+
+-- Cursor position
+opt.cursorline = true -- Highlight the current cursor line
+opt.cursorcolumn = true -- Highlight the current cursor column
+
+-- Appearance
+opt.termguicolors = true -- NOTE: make sure terminal supports this
+opt.background = "dark" -- Set for colorschemes that have light and dark options
+opt.scrolloff = 10 -- Don't allow scrolling within n-lines of the top or bottom of buffer
+opt.sidescrolloff = 10 -- Don't allow scolling within n-char of the left or right side of buffer
+opt.signcolumn = "yes:1" -- Keep signcolumn on by default
+opt.colorcolumn = "120" -- Place a vertical line at a good end of line position
+
+-- Decrease update time
+opt.updatetime = 250
+opt.timeoutlen = 300
+
+-- Set completeopt to have a better completion experience
+opt.completeopt = "menuone,noselect"
+
+-- Editing settings
+opt.wrap = false -- Disable line wrapping
+opt.tabstop = indent -- Space for tabs (prettier default)
+opt.shiftwidth = indent -- Spaces for indent width
+opt.expandtab = true -- Expand tab to spaces
+opt.autoindent = true -- Copy indent from current line when starting new line
 opt.smartindent = true
-
--- line wrapping
-opt.wrap = false -- disable line wrapping
-
--- search settings
-opt.ignorecase = true -- ignore case when searching
-opt.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive
-
--- cursor position
-opt.cursorline = true -- highlight the current cursor line
-opt.cursorcolumn = true -- highlight the current cursor column
-
--- appearance
-opt.termguicolors = true
-opt.background = "dark" -- colorschemes that can be light or dark will be made dark
-opt.scrolloff = 10 -- don't allow scrolling within 10 lines of top or bottom
-opt.sidescrolloff = 10 -- don't allow scrolling within 10 characters of left or right
-opt.signcolumn = "yes:1" -- show sign column so that text doesn't shift
-opt.colorcolumn = "120" -- place a veritical line at a good place to start a new line
 
 -- backspace
 opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
@@ -43,3 +69,5 @@ opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or 
 -- split windows
 opt.splitright = true -- split vertical window to the right
 opt.splitbelow = true -- split horizontal window to the bottom
+
+-- vim: ts=2 sts=2 sw=2 et
