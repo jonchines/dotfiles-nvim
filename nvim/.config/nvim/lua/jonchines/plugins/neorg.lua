@@ -1,12 +1,15 @@
 return {
   "nvim-neorg/neorg",
-  build = ":Neorg sync-parsers",
+  -- build = ":Neorg sync-parsers",
   dependencies = {
-    "nvim-treesitter/nvim-treesitter",
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    "nhrsh7t/nvim-cmp",
-    "nvim-lua/plenary.nvim",
+    "luarocks.nvim",
+    -- "nvim-treesitter/nvim-treesitter",
+    -- "nvim-treesitter/nvim-treesitter-textobjects",
+    -- "hrsh7t/nvim-cmp",
+    -- "nvim-lua/plenary.nvim",
   },
+  lazy = false,
+  version = "*",
   config = function()
     local neorg = require("neorg")
 
