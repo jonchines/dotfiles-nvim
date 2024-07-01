@@ -2,11 +2,18 @@ return {
   "nvim-neorg/neorg",
   -- build = ":Neorg sync-parsers",
   dependencies = {
+<<<<<<< HEAD:nvim/.config/nvim/lua/jonchines/plugins/neorg.lua
     "luarocks.nvim",
     -- "nvim-treesitter/nvim-treesitter",
     -- "nvim-treesitter/nvim-treesitter-textobjects",
     -- "hrsh7t/nvim-cmp",
     -- "nvim-lua/plenary.nvim",
+=======
+    "nvim-treesitter/nvim-treesitter",
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    "hrsh7th/nvim-cmp",
+    "nvim-lua/plenary.nvim",
+>>>>>>> bd36b83 (Remove Neorg until I have time to sort out the changes):nvim/.config/nvim/lua/jonchines/plugins/neorg.bak
   },
   lazy = false,
   version = "*",
