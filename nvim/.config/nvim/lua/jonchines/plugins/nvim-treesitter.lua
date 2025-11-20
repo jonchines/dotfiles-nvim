@@ -17,7 +17,7 @@ return {
       -- configure treesitter
       treesitter.setup({
         -- Enable syntax highlighting
-        highlight = { enable = true },
+        highlight = { enable = true, disable = { "latex" } },
         -- Enable indentation
         indent = { enable = true },
         -- Enable autotagging (w/ nvim-ts-autotag plugin)
@@ -28,28 +28,35 @@ return {
         ignore_install = {},
         -- Ensure these language parsers are installed
         ensure_installed = {
-          "bash",
-          "comment",
-          "css",
-          "dockerfile",
-          "gitignore",
+          -- Core infrastructure/DevOps languages
+          "terraform",
           "hcl",
-          "html",
-          "javascript",
-          "jq",
+          "yaml",
+          "bash",
+          "python",
+          "sql",
           "json",
+          "xml",
           "lua",
           "markdown",
           "markdown_inline",
-          "python",
-          "query",
-          "sql",
-          "terraform",
-          "tsx",
-          "typescript",
+          -- Supporting languages
+          "dockerfile",
+          "gitignore",
           "vim",
           "vimdoc",
-          "yaml",
+          "query",
+          "comment",
+          "jq",
+          -- LaTeX support
+          -- "latex",
+          -- "bibtex",
+          -- Minimal web support
+          "html",
+          "css",
+          "javascript",
+          "typescript",
+          "tsx",
         },
         incremental_selection = {
           enable = true,

@@ -30,10 +30,10 @@ keymap.set("n", "n", "nzzzv")
 keymap.set("n", "N", "Nzzzv")
 
 -- When pasting move the deleted text into the black hole register
-keymap.set("x", "<leader>p", '"_dP')
+-- keymap.set("x", "<leader>p", '"_dP')
 -- Similarly normal and visual mode delete to black hole register
-keymap.set("n", "<leader>d", '"_d')
-keymap.set("v", "<leader>d", '"_d')
+-- keymap.set("n", "<leader>d", '"_d')
+-- keymap.set("v", "<leader>d", '"_d')
 -- Delete single character to black hole register
 keymap.set("n", "x", '"_x')
 

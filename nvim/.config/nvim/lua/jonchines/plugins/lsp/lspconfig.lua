@@ -12,8 +12,6 @@ return {
     "folke/neodev.nvim",
   },
   config = function()
-    -- import lspconfig plugin
-    local lspconfig = require("lspconfig")
     -- import cmp-nvim-lsp plugin
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
     -- import Neovim Lua plugin
@@ -66,13 +64,6 @@ return {
 
       opts.desc = "Restart LSP"
       keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
-
-      -- typescript specific keymaps (e.g. rename file and update imports)
-      if client.name == "ts_ls" then
-        keymap.set("n", "<leader>rf", ":TypescriptRenameFile<CR>") -- rename file and update imports
-        keymap.set("n", "<leader>oi", ":TypescriptOrganizeImports<CR>") -- organize imports (not in youtube nvim video)
-        keymap.set("n", "<leader>ru", ":TypescriptRemoveUnused<CR>") -- remove unused variables (not in youtube nvim video)
-      end
     end
 
     -- used to enable autocompletion (assign to every lsp server config)
@@ -91,45 +82,16 @@ return {
     -- configure LSPSaga
     lspsaga.setup({})
 
-    -- configure html server
-    lspconfig["html"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
-    -- configure typescript server with plugin
-    lspconfig["ts_ls"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
-    -- configure css server
-    lspconfig["cssls"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
-    -- configure tailwindcss server
-    lspconfig["tailwindcss"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
-    -- configure emmet language server
-    lspconfig["emmet_ls"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-      filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
-    })
+    -- Core infrastructure/DevOps LSP servers
 
     -- configure python server
-    lspconfig["pyright"].setup({
+    vim.lsp.config("pyright", {
       capabilities = capabilities,
       on_attach = on_attach,
     })
 
     -- configure lua server (with special settings)
-    lspconfig["lua_ls"].setup({
+    vim.lsp.config("lua_ls", {
       capabilities = capabilities,
       on_attach = on_attach,
       settings = { -- custom settings for lua
@@ -150,62 +112,108 @@ return {
     })
 
     -- configure terraformls server
-    lspconfig["terraformls"].setup({
+    vim.lsp.config("terraformls", {
       capabilities = capabilities,
       on_attach = on_attach,
       -- filetypes = { "terraform" },
     })
 
     -- configure tflint server
-    lspconfig["tflint"].setup({
+    vim.lsp.config("tflint", {
       capabilities = capabilities,
       on_attach = on_attach,
     })
 
     -- configure ansiblels server
-    lspconfig["ansiblels"].setup({
+    vim.lsp.config("ansiblels", {
       capabilities = capabilities,
       on_attach = on_attach,
     })
 
     -- configure bashls server
-    lspconfig["bashls"].setup({
+    vim.lsp.config("bashls", {
       capabilities = capabilities,
       on_attach = on_attach,
     })
 
     -- configure dockerls server
-    lspconfig["dockerls"].setup({
+    vim.lsp.config("dockerls", {
       capabilities = capabilities,
       on_attach = on_attach,
     })
 
     -- configure json-lsp server
-    lspconfig["jsonls"].setup({
+    vim.lsp.config("jsonls", {
       capabilities = capabilities,
       on_attach = on_attach,
     })
 
     -- configure sqlls server
-    lspconfig["sqlls"].setup({
+    vim.lsp.config("sqlls", {
       capabilities = capabilities,
       on_attach = on_attach,
     })
 
     -- configure vimls server
-    lspconfig["vimls"].setup({
+    vim.lsp.config("vimls", {
       capabilities = capabilities,
       on_attach = on_attach,
     })
 
     -- configure yamlls server
-    lspconfig["yamlls"].setup({
+    vim.lsp.config("yamlls", {
       capabilities = capabilities,
       on_attach = on_attach,
     })
 
-    -- configure lemminx server
-    lspconfig["lemminx"].setup({
+    -- configure lemminx server (XML)
+    vim.lsp.config("lemminx", {
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+
+    -- configure texlab server (LaTeX)
+    vim.lsp.config("texlab", {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = {
+        texlab = {
+          build = {
+            executable = "latexmk",
+            args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+            onSave = false,
+            forwardSearchAfter = false,
+          },
+          forwardSearch = {
+            executable = nil, -- Set to your PDF viewer if you want forward search
+            args = {},
+          },
+          chktex = {
+            onOpenAndSave = false,
+            onEdit = false,
+          },
+          diagnosticsDelay = 300,
+          latexFormatter = "latexindent",
+          latexindent = {
+            ["local"] = nil, -- Set to path to .latexindent.yaml if you have one
+            modifyLineBreaks = false,
+          },
+        },
+      },
+    })
+
+    -- Minimal web support (occasionally used)
+    vim.lsp.config("html", {
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+
+    vim.lsp.config("ts_ls", {
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+
+    vim.lsp.config("cssls", {
       capabilities = capabilities,
       on_attach = on_attach,
     })
