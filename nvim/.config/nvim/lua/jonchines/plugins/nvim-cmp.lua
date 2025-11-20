@@ -7,9 +7,8 @@ return {
     "hrsh7th/cmp-path", -- source for file system paths
     "hrsh7th/cmp-cmdline", -- source for file system paths
     "hrsh7th/cmp-nvim-lua", -- source for lua
-    "L3MON4D3/LuaSnip", -- snippet engine
     "saadparwaiz1/cmp_luasnip", -- for autocompletion
-    "rafamadriz/friendly-snippets", -- useful snippets
+    "L3MON4D3/LuaSnip", -- snippet engine (configured in luasnip.lua)
     "onsails/lspkind.nvim", -- vs-code like pictograms
   },
   config = function()
@@ -18,9 +17,6 @@ return {
     local lspkind = require("lspkind")
     local defaults = require("cmp.config.default")()
     local max_items = 5
-
-    -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
-    require("luasnip.loaders.from_vscode").lazy_load()
 
     cmp.setup({
       window = {

@@ -27,22 +27,25 @@ return {
     mason_lspconfig.setup({
       -- list of servers for mason to install
       ensure_installed = {
+        -- Core languages for infrastructure/DevOps
+        "terraformls",
+        "tflint",
+        "ansiblels",
+        "yamlls",
+        "bashls",
+        "pyright",
+        "sqlls",
+        "jsonls",
+        "lemminx", -- XML
+        "lua_ls",
+        "dockerls",
+        "vimls",
+        -- LaTeX support
+        "texlab",
+        -- Minimal web support (occasionally used)
         "ts_ls",
         "html",
         "cssls",
-        "tailwindcss",
-        "lua_ls",
-        "emmet_ls",
-        "pyright",
-        "terraformls",
-        "tflint",
-        "lemminx",
-        "bashls",
-        "dockerls",
-        "yamlls",
-        "jsonls",
-        "sqlls",
-        "vimls",
       },
       -- auto-install configured servers (with lspconfig)
       automatic_installation = true, -- not the same as ensure_installed
@@ -50,16 +53,23 @@ return {
 
     mason_tool_installer.setup({
       ensure_installed = {
-        "prettier", -- prettier formatter
+        -- Core formatters
         "stylua", -- lua formatter
-        "isort", -- python formatter
+        "prettier", -- multi-purpose formatter (markdown, yaml, json)
         "black", -- python formatter
-        "jq", -- json formatter
-        "pylint", -- python linter
-        "eslint_d", -- js linter
+        "isort", -- python import sorter
+        "sqlfmt", -- sql formatter
+        "shfmt", -- shell/bash formatter
+        "xmlformatter", -- xml formatter
+        -- Core linters
         "tflint", -- terraform linter
         "ansible-lint", -- ansible linter
         "yamllint", -- yaml linter
+        "pylint", -- python linter
+        "shellcheck", -- bash linter
+        "markdownlint", -- markdown linter
+        -- Optional web linters (minimal)
+        "eslint_d", -- js linter
       },
       automatic_installation = true,
     })
