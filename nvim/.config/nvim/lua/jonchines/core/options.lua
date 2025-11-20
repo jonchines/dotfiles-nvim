@@ -5,6 +5,12 @@
 local opt = vim.opt -- Used to be concise
 local indent = 2
 
+-- Nerd Font
+vim.g.have_nerd_font = "true"
+
+-- Session settings (as instructed by checkhealth)
+opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
 -- Set file encoding
 opt.fileencoding = "utf-8"
 
