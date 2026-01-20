@@ -292,6 +292,9 @@
 ### Completion Sources
 - LSP (language server completions)
 - LuaSnip (snippets)
+- Obsidian (wiki links, tags) - Markdown files only
+- Obsidian New (create new notes) - Markdown files only
+- Obsidian Tags (tag completions) - Markdown files only
 - Buffer (text from current buffer)
 - Path (filesystem paths)
 
@@ -398,9 +401,66 @@ Uses [Comment.nvim](https://github.com/numToStr/Comment.nvim) with default keybi
 - **Preview**: Live HTML preview in browser on port 8888
 - **Table Mode**: Auto-format tables as you type
 - **TOC**: Auto-generate and update table of contents
-- **Syntax**: Enhanced concealing for cleaner display
+- **Syntax**: Enhanced concealing for cleaner display (via obsidian.nvim)
 - **Frontmatter**: YAML frontmatter support
 - **Strikethrough**: `~~text~~` support
+
+### Obsidian.nvim Integration
+
+Obsidian.nvim provides note-taking features for Obsidian vaults in Neovim.
+
+#### Note Management
+
+| Mode | Keybinding | Description | Context |
+|------|------------|-------------|---------|
+| n | `<leader>on` | Create new note | Markdown files |
+| n | `<leader>oo` | Search Obsidian notes | Markdown files |
+| n | `<leader>os` | Quick switch between notes | Markdown files |
+| n | `<leader>ob` | Show backlinks to current note | Markdown files |
+| n | `<leader>ol` | Show all links in current note | Markdown files |
+| v | `<leader>ol` | Create link from selection | Markdown files |
+| v | `<leader>oL` | Create new note from selection | Markdown files |
+| n | `<leader>oT` | Insert template | Markdown files |
+
+#### Daily Notes
+
+| Mode | Keybinding | Description | Context |
+|------|------------|-------------|---------|
+| n | `<leader>ot` | Open today's daily note | Markdown files |
+| n | `<leader>oy` | Open yesterday's daily note | Markdown files |
+
+#### Navigation & Actions
+
+| Mode | Keybinding | Description | Context |
+|------|------------|-------------|---------|
+| n | `<CR>` | Smart action (follow link, toggle checkbox, expand fold) | Markdown files |
+| n | `<leader>ch` | Toggle checkbox state | Markdown files |
+| n | `]o` | Navigate to next link | Markdown files |
+| n | `[o` | Navigate to previous link | Markdown files |
+
+#### Completion Triggers
+
+In insert mode within Obsidian vault markdown files:
+- `[[` - Trigger wiki-style link completion
+- `[` - Trigger markdown link completion
+- `#` - Trigger tag completion
+
+**Note:** `<CR>` (Enter) in insert mode intelligently handles both completion confirmation (when menu is visible) and obsidian smart actions (when menu is not visible).
+
+#### Obsidian Features
+- **Wiki Links**: `[[note-name]]` style linking
+- **Backlinks**: Find all notes linking to current note
+- **Tags**: `#tag` support with completion
+- **Daily Notes**: Automatic daily note creation in `daily/` folder with format `YYYY-MM-DD`
+- **Templates**: Insert predefined note templates
+- **Checkboxes**: Multiple checkbox states with custom icons:
+  - `[ ]` - Todo (unchecked)
+  - `[x]` - Done (checked)
+  - `[>]` - Forward/Rescheduled
+  - `[~]` - In progress
+- **Image Attachments**: Store in `assets/imgs/`
+- **UI Enhancements**: Custom concealment, bullets, and highlighting
+- **Workspace**: Configured for `/data/jhines/1_personal/notes`
 
 ---
 
@@ -613,6 +673,18 @@ Automatic completion is provided for:
 ### `<leader>n` - Miscellaneous
 - `nh` - Clear search highlights
 
+### `<leader>o` - Obsidian (Markdown)
+- `on` - New note
+- `oo` - Search notes
+- `os` - Quick switch notes
+- `ob` - Show backlinks
+- `ol` - Show/create links
+- `oL` - Create new note from selection
+- `ot` - Open today's note
+- `oy` - Open yesterday's note
+- `oT` - Insert template
+- `ch` - Toggle checkbox
+
 ### `<leader>r` - Refactor/Restart
 - `rn` - Rename symbol
 - `rs` - Restart LSP
@@ -679,8 +751,10 @@ Automatic completion is provided for:
 4. **LSP features** only work when an LSP server is attached to the buffer
 5. **Git features** only work in git repositories
 6. **Markdown features** only available in `.md` files
-7. **LaTeX features** only available in `.tex` and `.bib` files
-8. **Which-key** will show available keybindings after pressing `<leader>` with a 500ms delay
+7. **Obsidian features** only available in `.md` files within the configured vault (`/data/jhines/1_personal/notes`)
+8. **LaTeX features** only available in `.tex` and `.bib` files
+9. **Which-key** will show available keybindings after pressing `<leader>` with a 500ms delay
+10. **Enter key (`<CR>`)** in markdown files intelligently handles both completion confirmation (when cmp menu visible) and obsidian smart actions (when menu not visible)
 
 ---
 

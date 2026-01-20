@@ -41,18 +41,21 @@ return {
     },
   },
   -- Better markdown concealing and syntax
+  -- NOTE: Some features disabled to avoid conflicts with obsidian.nvim
   {
     "preservim/vim-markdown",
     ft = { "markdown" },
     config = function()
       vim.g.vim_markdown_folding_disabled = 1
-      vim.g.vim_markdown_conceal = 1
+      -- Disable vim-markdown concealment in favor of obsidian.nvim's UI
+      vim.g.vim_markdown_conceal = 0
       vim.g.vim_markdown_conceal_code_blocks = 0
       vim.g.vim_markdown_frontmatter = 1
       vim.g.vim_markdown_strikethrough = 1
       vim.g.vim_markdown_autowrite = 1
       vim.g.vim_markdown_edit_url_in = "tab"
-      vim.g.vim_markdown_follow_anchor = 1
+      -- Disable vim-markdown link following in favor of obsidian.nvim
+      vim.g.vim_markdown_follow_anchor = 0
     end,
   },
 }

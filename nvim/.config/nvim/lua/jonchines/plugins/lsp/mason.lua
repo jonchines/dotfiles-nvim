@@ -40,6 +40,8 @@ return {
         "lua_ls",
         "dockerls",
         "vimls",
+        -- Markdown support
+        "marksman",
         -- LaTeX support
         "texlab",
         -- Minimal web support (occasionally used)

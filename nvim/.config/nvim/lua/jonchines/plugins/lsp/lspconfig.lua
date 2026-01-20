@@ -70,11 +70,25 @@ return {
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
     -- Change the Diagnostic symbols in the sign column (gutter)
+    vim.diagnostic.config({
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = " ",
+          [vim.diagnostic.severity.WARN] = " ",
+          [vim.diagnostic.severity.HINT] = "󰠠 ",
+          [vim.diagnostic.severity.INFO] = " ",
+        },
+      },
+    })
+
+    --[[
+    -- OLD DEPRECATED METHOD:
     local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
     for type, icon in pairs(signs) do
       local hl = "DiagnosticSign" .. type
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
+    --]]
 
     -- configure Neodev server
     neodev.setup({})
@@ -168,6 +182,12 @@ return {
 
     -- configure lemminx server (XML)
     vim.lsp.config("lemminx", {
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+
+    -- configure marksman server (Markdown)
+    vim.lsp.config("marksman", {
       capabilities = capabilities,
       on_attach = on_attach,
     })

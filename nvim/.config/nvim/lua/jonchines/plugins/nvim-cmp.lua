@@ -39,12 +39,26 @@ return {
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
         ["<C-e>"] = cmp.mapping.abort(), -- close completion window
-        ["<CR>"] = cmp.mapping.confirm({ select = false }),
+        -- Only confirm completion if menu is visible, otherwise fallback to default behavior (obsidian.nvim can handle it)
+        ["<CR>"] = cmp.mapping({
+          i = function(fallback)
+            if cmp.visible() and cmp.get_active_entry() then
+              cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+            else
+              fallback()
+            end
+          end,
+          s = cmp.mapping.confirm({ select = false }),
+          c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
+        }),
       }),
       -- sources for autocompletion
       sources = cmp.config.sources({
         { name = "nvim_lsp", max_item_count = max_items }, -- LSP
         { name = "luasnip", max_item_count = max_items }, -- Snippets
+        { name = "obsidian", max_item_count = max_items }, -- Obsidian notes
+        { name = "obsidian_new", max_item_count = max_items }, -- Obsidian new notes
+        { name = "obsidian_tags", max_item_count = max_items }, -- Obsidian tags
         { name = "buffer", max_item_count = max_items }, -- Text within current buffer
         { name = "path", max_item_count = max_items }, -- File system paths
         { name = "neorg", max_item_count = max_items },
@@ -57,6 +71,9 @@ return {
           menu = {
             nvim_lsp = "[LSP]",
             luasnip = "[Snip]",
+            obsidian = "[Obsidian]",
+            obsidian_new = "[Obsidian New]",
+            obsidian_tags = "[Tags]",
             path = "[Path]",
             buffer = "[Buffer]",
             neorg = "[Neorg]",
