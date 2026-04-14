@@ -9,11 +9,15 @@ return {
       "windwp/nvim-ts-autotag",
       "JoosepAlviste/nvim-ts-context-commentstring",
     },
+    init = function()
+      -- Prevent the plugin from setting up autocommands by marking it as loaded
+      -- We'll use it manually via Comment.nvim's pre_hook instead
+      vim.g.loaded_ts_context_commentstring = 1
+      vim.g.skip_ts_context_commentstring_module = true
+    end,
     config = function()
       -- import nvim-treesitter plugin
       local treesitter = require("nvim-treesitter.config")
-
-      vim.g.skip_ts_context_commentstring_module = true
 
       -- configure treesitter
       treesitter.setup({
